@@ -1,0 +1,49 @@
+<div class="header-content">
+	<header class="box header header-transparent">
+		<div class="header-banner" style="background-image:url('{{ config.header_config.pane_file }}')">
+			<div class="header-banner-content">
+				<span class="logo"></span>
+				<ul class="navigation">
+					<li><a href="/">Home</a></li>
+					<span>|</span>
+					<li><a href="#">Groups</a></li>
+					<span>|</span>
+					<li><a href="#">Users</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="header-bar">
+			<ul class="navigation">
+				{% if session.grapename is defined %}
+					<li><b>Signed in as </b></li>
+					<li><a href="/user.html">{{ session.grapename }} </a></li>
+				{% else %}
+					<li><b>You are not logged in.</b></li>
+				{% endif %}
+			</ul>
+			<ul class="navigation">
+				{% if session.grapename is defined %}
+					<li><a href="#">Notifications (1)</a></li>
+					<span> | </span>
+					<li><a href="/settings.html">Settings</a></li>
+					<span> | </span>
+					<li><a href="/request/sign_out">Sign Out</a></li>
+				{% else %}
+					<li><a href="/sign_in">Sign In</a></li>
+					<span> | </span>
+					<li><a href="/sign_up">Sign Up</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</header>
+</div>
+
+{% if session.alert is defined %}
+	<div class="alert 
+		{% if session.alert.type == 0 %}alert-success{% endif %}
+		{% if session.alert.type == 1 %}alert-error{% endif %}
+		{% if session.alert.type == 2 %}alert-warning{% endif %}
+	">
+		{{ session.alert.message|raw }}
+	</div>
+{% endif %}

@@ -1,0 +1,26 @@
+{% extends "base.twig" %}
+
+{%- block main_content -%}
+    <div class="box content">
+        <h1 class="box-title">
+            Sign Up for GrapeMod
+        </h1>
+        <div class="box-inner padding">
+            <h1>Benifits of joining</h1><br>
+            <ul>
+                <li><span class="icon icon-user-comment"></span> Join the smallest content sharing website</li>
+                <li><span class="icon icon-controller"></span> Share your mods and music with a tightly knit community</li>
+                <li><span class="icon icon-comments"></span> Recieve feedback and criticism and rate others with stars</li>
+            </ul><br>
+            <form action="/request/sign_up" method="POST">
+                <input type="text" placeholder="USERNAME" class="form-control" name="username-grape" required><br>
+                <div class="note">Your username must only be alphanumerical and must not contain any special characters.</div><br>
+                <input type="email" placeholder="E-MAIL (Not Required)" class="form-control" name="email-grape"><br>
+                <div class="note">Your email is not required but it can be used for support purposes.</div><br>
+                <input type="password" placeholder="PASSWORD" class="form-control" name="password-grape" required><br>
+                <div class="note">Your password must be longer than 8 characters and must use more than 2 numbers.</div><br>
+                <input type="submit" class="btn" value="Sign Up" name="confirm_button">
+            </form>
+        </div>
+    </div>
+{% endblock %}
