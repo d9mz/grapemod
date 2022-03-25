@@ -68,6 +68,10 @@ h3.box-title {
 	color: #fff;
 }
 
+.header-content {
+    width: 100%;
+}
+
 .header-banner {
 	display: flex;
 	flex-direction: row;
@@ -118,8 +122,25 @@ h3.box-title {
 	background-size: cover;
 }
 
+.mod-expanded-info {
+	display: inline-block;
+	vertical-align: top;
+	width: 94%;
+}
+
 .navigation > li {
 	display: inline-block;
+}
+
+.big {
+	font-size: 115%;
+}
+
+.game-selection {
+	display: inline-block;
+	width: 10px;
+	background-color: yellow;
+	vertical-align: middle;
 }
 
 .navigation a {
@@ -131,6 +152,12 @@ h3.box-title {
 	line-height: 1.5;
 	color: inherit;
 	font-weight: 600;
+}
+
+.emblem-game {
+	width: 100%;
+	margin-bottom: 3px;
+	image-rendering: pixelated;
 }
 
 .footer a {
@@ -149,7 +176,7 @@ h3.box-title {
 }
 
 .sidebar {
-	width: 325px;
+	width: 50%;
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
@@ -158,6 +185,10 @@ h3.box-title {
 .search-box {
 	padding: 5px;
 	background-color: #212121;
+}
+
+.inline {
+	display: inline-block;
 }
 
 .search-bar .form-control {
@@ -201,6 +232,25 @@ input[type="checkbox"] {
 	margin-top: 3px;
 	margin-bottom: 5px;
 	font-size: 9.5px;
+}
+
+.inherit-color {
+	color: inherit;
+}
+
+input[type="select"]::selection {
+	color: #989898;
+}
+
+.note a {
+	color: inherit;
+}
+
+hr {
+	height: 1px;
+	background-color: #000;
+	border: 0;
+	margin: 4px 0;
 }
 
 .btn:active {

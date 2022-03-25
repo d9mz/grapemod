@@ -1,0 +1,57 @@
+{% extends "base.twig" %}
+
+{%- block main_content -%}
+    <div class="box content">
+        <h1 class="box-title">
+            {{ user.username }} 
+            
+            {% if user.username != session.grapename %}
+                <a href="/request/friend?user={{ user.username }}"><button style="font-size: 10px" class="btn right-align">Friend This User</button></a>
+            {% else %}
+                <a href="/request/friend?user={{ user.username }}"><button style="font-size: 10px" class="btn right-align">Can't Friend Yourself</button></a>
+            {% endif %}
+        </h1>
+        <div class="box-inner padding">
+            <h1 class="inline">Blurb</h1><br>
+            {% if user.description is not empty %}
+                {{ user.description }}
+            {% else %}
+                <i>This user has no blurb at the moment...</i>
+            {% endif %}
+            <br><br>
+            <ul>
+                {% for mod in mods %}
+                    {% if mod.id is defined %}
+                        <hr>
+                        <li><span class="icon icon-controller"></span> <b>{{ mod.content_author }} </b> uploaded a mod: <a class="inherit-color" href="/content/{{ mod.id }}">{{ mod.content_title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if mods.rows == 0 %}
+                    <i>This user has no content published yet!</i>
+                {% endif %}
+            </ul><br>
+            {% if session.grapename is defined %}
+                <form action="/request/comment?profile={{ user.username }}" method="POST" autocomplete="off">
+                    <div class="box content">
+                        <div class="box-inner padding">
+                            <input type="text" placeholder="YOUR COMMENT" class="form-control" name="comment-grape" required><br>
+                            <div class="note">Your comment must be shorter than 150 characters.</div>
+                        </div>
+                    </div><br>
+                    <input type="submit" class="btn" value="Send Comment" name="confirm_button">
+                </form><br>
+            {% else %}
+                <a class="inherit-color" href="/sign_in">Sign in</a> to comment on this user's page!
+            {% endif %}
+            <ul>
+                {% for comment in comments %}
+                    {% if comment.id is defined %}
+                        <hr>
+                        <li><span class="icon icon-user-comment"></span> <a href="/user/{{ comment.comment_author }}" class="inherit-color"><b>{{ comment.comment_author }}</b></a> commented: "{{ comment.comment_text }}"</li>
+                    {% endif %}
+                {% endfor %}
+            </ul><br>
+        </div>
+    </div>
+{% endblock %}

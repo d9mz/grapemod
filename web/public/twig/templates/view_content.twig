@@ -1,0 +1,55 @@
+{% extends "base.twig" %}
+
+{%- block main_content -%}
+    <div class="box content">
+        <h1 class="box-title">
+            {{ mod.content_title }} by <a class="inherit-color" href="/user/{{ mod.content_author }}">{{ mod.content_author }}</a>
+        
+            <a href="/content/mod/{{ mod.content_file }}"><button style="font-size: 10px" class="btn right-align">Download</button></a>
+        </h1>
+        <div class="box-inner padding">
+            <img style="width: 100%;" src="/img/banners/{{ mod.content_category }}.gif" /><br><br>
+
+            <h1 class="inline">Description</h1><br>
+            {% if mod.content_description is not empty %}
+                {{ mod.content_description|nl2br }}
+            {% else %}
+                <i>This mod has no description at the moment...</i>
+            {% endif %}
+            <br><hr>
+            <h1 class="inline">Tags</h1><br>
+            {{ mod.content_tags }}
+            <br>
+
+            <h1 class="inline">Category</h1><br>
+            {{ mod.content_category }}
+            <br>
+
+            <h1 class="inline">Uploaded</h1><br>
+            {{ mod.date_created }}
+            <br><br>
+
+            {% if session.grapename is defined %}
+                <form action="/request/comment_content?id={{ mod.id }}" method="POST" autocomplete="off">
+                    <div class="box content">
+                        <div class="box-inner padding">
+                            <input type="text" placeholder="YOUR COMMENT" class="form-control" name="comment-grape" required><br>
+                            <div class="note">Your comment must be shorter than 150 characters.</div>
+                        </div>
+                    </div><br>
+                    <input type="submit" class="btn" value="Send Comment" name="confirm_button">
+                </form><br>
+            {% else %}
+                <a class="inherit-color" href="/sign_in">Sign in</a> to comment on this mod's page!
+            {% endif %}
+            <ul>
+                {% for comment in comments %}
+                    {% if comment.id is defined %}
+                        <hr>
+                        <li><span class="icon icon-user-comment"></span> <b>{{ comment.comment_author }} </b> commented: "{{ comment.comment_text }}"</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

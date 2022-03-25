@@ -1,0 +1,52 @@
+{% extends "base.twig" %}
+
+{%- block main_content -%}
+    <div class="box content">
+        <h1 class="box-title">
+            Create Content
+        </h1>
+        <div class="box-inner padding">
+            <h1>Here are the guidelines.. Follow them...</h1><br>
+            <ul>
+                <li><span class="icon icon-user-comment"></span> Your mod has to manually be approved by administrators.</li>
+                <li><span class="icon icon-email"></span> Have your mod be in a zip file.</li>
+            </ul><br>
+
+            <form action="/request/upload_content" method="POST" enctype="multipart/form-data">
+                <div class="box content">
+                    <div class="box-inner padding">
+                        <input type="text" placeholder="MOD NAME" class="form-control" name="mod-title-grape" required><br>
+                        <div class="note">Your mod title must only be alphanumerical and must not contain more than 40 characters.</div><br>
+                        
+                        <select name="game" class="form-control">
+                            <option value="Counter Strike: Source">Counter Strike: Source</option>
+                            <option value="Counter Strike: 1.6">Counter Strike: 1.6</option>
+                            <option value="Counter Strike: Global Offensive">Counter Strike: Global Offensive</option>
+                            <option value="Garry's Mod">Garry's Mod</option>
+                            <option value="Half Life 1">Half Life 1</option>
+                            <option value="Half Life 2">Half Life 2 (Including Episodes)</option>
+                            <option value="Team Fortress 2">Team Fortress 2</option>
+                            <option value="Team Fortress Classic">Team Fortress Classic</option>
+                            <option value="Grand Theft Auto: Vice City">Grand Theft Auto: Vice City</option>
+                            <option value="Grand Theft Auto: San Andreas">Grand Theft Auto: San Andreas</option>
+                            <option value="Grand Theft Auto IV">Grand Theft Auto 4</option>
+                            <option value="Grand Theft Auto III">Grand Theft Auto 3</option>
+                            <option value="Minecraft">Minecraft</option>
+                        </select>
+
+                        <div class="note">Select the game that your mod will be played on.<br>Is your game not here? <a href="/suggest_game">Suggest a game.</a></div><br>
+                        <textarea rows="5" name="mod-description-grape" style="resize: vertical" class="form-control" placeholder="MOD DESCRIPTION"></textarea>
+                        <div class="note">Your description has to be less than 5000 characters.</div><br>
+
+                        <input type="text" placeholder="MOD TAGS" class="form-control" name="tags-grape" required><br>
+                        <div class="note">You must seperate your tags with a comma; for example<pre>gmod,css,defuse map,fun</pre></div><br>
+
+                        <input type="file" accept=".zip" placeholder="MOD TAGS" class="form-control" name="mod-grape" required><br>
+                        <div class="note">Your file must be a valid ZIP file.</pre></div>
+                    </div>
+                </div><br>
+                <input type="submit" class="btn" value="Create Content" name="confirm_button">
+            </form>
+        </div>
+    </div>
+{% endblock %}

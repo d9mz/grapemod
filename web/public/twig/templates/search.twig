@@ -1,0 +1,47 @@
+{% extends "base.twig" %}
+
+{%- block main_content -%}
+    <div class="box content">
+        <h1 class="box-title">
+            {% if args.category is defined %}
+                Search for "{{ args.category }}"
+            {% else %}
+                Search for "{{ args.name }}"
+            {% endif %}
+        </h1>
+        <div class="box-inner padding">
+            {% if args.category is defined %}
+                <img class="emblem-game" src="/img/banners/{{ emblem }}.gif"><br><hr>
+            {% endif %}
+            <ul>
+                {% for mod in mods %}
+                    {% if mod.id is defined %}
+                        <li>
+                            <span class="icon icon-controller"></span> 
+                            <span class="mod-expanded-info">
+                                <b>{{ mod.content_author }} </b> uploaded a mod: <a class="inherit-color" href="/content/{{ mod.id }}">{{ mod.content_title }}</a><br>
+                                <div class="note">
+                                    {{ mod.content_description|length > 100 ? mod.content_description|slice(0, 100) ~ '...' : mod.content_description |nl2br }}
+                                </div>
+                            </span>
+                        </li>
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if mods.rows == 0 %}
+                    <br><br>
+                    <center>
+                        <li><b>There are no results for your search query.</b><br>Make sure you haven't mispelt anything.</li>
+                    </center>
+                {% endif %}
+                {% if referrer is not empty %}
+                    <br>
+                    <center>
+                        <a href="{{ referrer }}" class="inherit-color"><i>Go back...</i></a>
+                    </center>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

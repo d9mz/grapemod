@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+
+{%- block main_content -%}
+    <div class="box content">
+        <h1 class="box-title">
+            GrapeMod Games
+
+            <a href="/create_content"><button style="font-size: 10px" class="btn right-align">Upload Content</button></a>
+        </h1>
+        <div class="box-inner padding">
+            {% for emblem in emblems %}
+                <a href="/search?category={{ emblem|remove_extension() }}">
+                    <img alt="{{ emblem|remove_extension() }}" class="emblem-game" src="/img/banners/{{ emblem }}">
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

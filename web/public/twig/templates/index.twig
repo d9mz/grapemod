@@ -3,10 +3,79 @@
 {%- block main_content -%}
     <div class="box content">
         <h1 class="box-title">
-            Welcome to GrapeMod
+            {% if session.grapename is not defined %}
+                Welcome to GrapeMod
+            {% else %}
+                GrapeMod Dashboard <a href="/create_content"><button style="font-size: 10px" class="btn right-align">Upload Content</button></a>
+            {% endif %}
         </h1>
         <div class="box-inner padding">
-
+            {% if session.grapename is not defined %}
+                <h1>Recently released mods</h1>
+                <ul>
+                    {% for mod in mods %}
+                        {% if mod.id is defined %}
+                            <hr>
+                            <li><span class="icon icon-controller"></span> <b>{{ mod.content_author }} </b> uploaded a mod: <a class="inherit-color" href="/content/{{ mod.id }}">{{ mod.content_title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                
+                <hr>
+                <h1>Users who signed up recently</h1>
+                <ul>
+                    {% for user in users %}
+                        {% if user.id is defined %}
+                            <hr>
+                            <li><span class="icon icon-user"></span> <b><a href="/user/{{ user.username }}" class="inherit-color">{{ user.username }}</a></b> signed up onto the site, say hi!</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                
+                <hr>
+                <h1>Benifits of joining</h1><br>
+                <ul>
+                    <li><span class="icon icon-user-comment"></span> Join the smallest content sharing website</li>
+                    <li><span class="icon icon-controller"></span> Share your mods and music with a tightly knit community</li>
+                    <li><span class="icon icon-comments"></span> Recieve feedback and criticism and rate others with stars</li>
+                </ul><br>
+                <div class="box content">
+                    <div class="box-inner padding">
+                        <form action="/request/sign_in" method="POST">
+                            <input type="text" placeholder="USERNAME" class="form-control" name="username-grape" required><br>
+                            <div class="note">Your username must only be alphanumerical and must not contain any special characters.</div><br>
+                            <input type="email" placeholder="E-MAIL (Not Required)" class="form-control" name="email-grape"><br>
+                            <div class="note">Your email is not required but it can be used for support purposes.</div><br>
+                            <input type="password" placeholder="PASSWORD" class="form-control" name="password-grape" required><br>
+                            <div class="note">Your password must be longer than 8 characters and must use more than 2 numbers.</div><br>
+                            <span class="right-align"><input type="checkbox" class="btn" name="rememberme"> Keep me signed in</span><br>
+                            <input type="submit" class="btn" value="Sign In" name="confirm_button">
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <h1 class="inline">Recent Updates</h1>
+                <br>
+                Your last 20 updates on the site will pop up here.<br><br>
+                <ul>
+                     {% for mod in mods %}
+                        {% if mod.id is defined %}
+                            <hr>
+                            <li><span class="icon icon-controller"></span> <b>{{ mod.content_author }} </b> uploaded a mod: <a class="inherit-color" href="/content/{{ mod.id }}">{{ mod.content_title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <hr>
+                    <li><span class="icon icon-user-comment"></span> <b>sp1200</b> commented on your profile: "Example text cut off 20 cha..."</li>
+                    <hr>
+                    <li><span class="icon icon-email"></span> <b>sdf</b> sent you a private message: "Message preview, cutoff he..." </li>
+                    {% for user in users %}
+                        {% if user.id is defined %}
+                            <hr>
+                            <li><span class="icon icon-user"></span> <b><a href="/user/{{ user.username }}" class="inherit-color">{{ user.username }}</a></b> signed up onto the site, say hi!</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul><br>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

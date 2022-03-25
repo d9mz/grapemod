@@ -16,7 +16,7 @@
 			<ul class="navigation">
 				{% if session.grapename is defined %}
 					<li><b>Signed in as </b></li>
-					<li><a href="/user.html">{{ session.grapename }} </a></li>
+					<li><a href="/user/{{ session.grapename }}">{{ session.grapename }} </a></li>
 				{% else %}
 					<li><b>You are not logged in.</b></li>
 				{% endif %}
@@ -45,5 +45,17 @@
 		{% if session.alert.type == 2 %}alert-warning{% endif %}
 	">
 		{{ session.alert.message|raw }}
+	</div>
+{% endif %}
+
+{% if mod.id is defined and mod.status == "invis" %}
+	<div class="alert alert-error
+	">
+		This mod has not been approved yet. Proceed with caution!
+	</div>
+{% elseif mod.id is defined and mod.status == "visib" %}
+	<div class="alert alert-success
+	">
+		This mod has been approved and has been declared safe by our moderators.
 	</div>
 {% endif %}
