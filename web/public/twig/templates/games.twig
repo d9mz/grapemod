@@ -1,18 +1,31 @@
 {% extends "base.twig" %}
 
 {%- block main_content -%}
-    <div class="box content">
-        <h1 class="box-title">
-            GrapeMod Games
+<div class="box" style="width: 100%;">
+    <div class="box-title">
+        All Mods on GrapeMod
 
-            <a href="/create_content"><button style="font-size: 10px" class="btn right-align">Upload Content</button></a>
-        </h1>
-        <div class="box-inner padding">
-            {% for emblem in emblems %}
-                <a href="/search?category={{ emblem|remove_extension() }}">
-                    <img alt="{{ emblem|remove_extension() }}" class="emblem-game" src="/img/banners/{{ emblem }}">
-                </a>
-            {% endfor %}
-        </div>
+        <a href="/create_content">
+            <button class="right-align btn">
+                Upload Mod
+            </button>
+        </a>
     </div>
+    <div class="grid grid-row-3 featured-games">
+        {% set game_i = -1 %}
+        {% for emblem in emblems %}
+            {% set game_i = game_i + 1 %}
+            <div class="game-tile">
+                <a href="/search?category={{ emblem|remove_extension() }}">
+                    <div class="flex flex-col">
+                        <img class="game-cover" src="/img/gametiles/{{ emblem }}">
+                        <b class="label-primary">{{ emblem|remove_extension() }}</b>
+                        <span class="label-secondary">{{ game_count[game_i][1] }} Mods</span>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

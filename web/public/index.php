@@ -64,9 +64,22 @@ $router->get('/games', function() use ($twig, $__db) {
 
     $contents['rows'] = $content_search->rowCount();
 
+    $games = array_diff(scandir($_SERVER['DOCUMENT_ROOT'] . "/img/gametiles/"), array('..', '.'));
+    $game_count = [];
+
+    foreach($games as $game) {
+        $game = pathinfo($game, PATHINFO_FILENAME);
+        $mod_search = $__db->prepare("SELECT * FROM content WHERE content_category = :game LIMIT 100");
+        $mod_search->bindParam(":game", $game);
+        $mod_search->execute();    
+
+        array_push($game_count, [$game, $mod_search->rowCount()]);
+    }
+
     echo $twig->render('games.twig', array(
-        "emblems" => array_diff(scandir($_SERVER['DOCUMENT_ROOT'] . "/img/banners/"), array('..', '.')),
-        "mods"    => $contents,
+        "emblems"    => $games,
+        "game_count" => $game_count, 
+        "mods"       => $contents,
     ));
 });
 

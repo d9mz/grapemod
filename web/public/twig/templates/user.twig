@@ -18,7 +18,7 @@
             {% else %}
                 <i>This user has no blurb at the moment...</i>
             {% endif %}
-            <br><br>
+            <hr>
             <ul>
                 {% for mod in mods %}
                     {% if mod.id is defined %}
@@ -30,7 +30,7 @@
                 {% if mods.rows == 0 %}
                     <i>This user has no content published yet!</i>
                 {% endif %}
-            </ul><br>
+            </ul><hr>
             {% if session.grapename is defined %}
                 <form action="/request/comment?profile={{ user.username }}" method="POST" autocomplete="off">
                     <div class="box content">
